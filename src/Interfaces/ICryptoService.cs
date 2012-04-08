@@ -16,7 +16,9 @@ namespace SimpleCrypto
 
         string HashedText { get; }
 
-        string Salt { get; }
+        string Salt { get; set; }
+
+        string Compute();
 
         string Compute(string textToHash);
 
