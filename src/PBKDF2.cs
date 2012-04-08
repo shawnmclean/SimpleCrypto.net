@@ -9,12 +9,6 @@ namespace SimpleCrypto
 {
     public class PBKDF2 : ICryptoService
     {
-        public PBKDF2()
-        {
-            //Set defaults
-            HashIterations = 50;
-            SaltSize = 16;
-        }
 
         public int HashIterations
         { get; set; }
@@ -74,26 +68,13 @@ namespace SimpleCrypto
             return HashedText;
         }
 
-
-
-        public string Compute(string textToHash)
+        
+        public string Compute(string textToHash, int saltSize = 16, int hashIterations = 50)
         {
             PlainText = textToHash;
-            Compute();
-            return HashedText;
-        }
-
-        public string Compute(string textToHash, int saltSize)
-        {
-            SaltSize = saltSize;
-            Compute(textToHash);
-            return HashedText;
-        }
-
-        public string Compute(string textToHash, int saltSize, int hashIterations)
-        {
             HashIterations = hashIterations;
-            Compute(textToHash, saltSize);
+            SaltSize = saltSize;
+            Compute();
             return HashedText;
         }
 
