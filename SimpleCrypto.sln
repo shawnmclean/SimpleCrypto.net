@@ -11,16 +11,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrypto.Tests", "tests
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C2AB8C95-5AAF-42BC-B435-55E248A263F7}"
 	ProjectSection(SolutionItems) = preProject
+		AssemblyInfo.cs = AssemblyInfo.cs
 		LICENSE = LICENSE
 		README.md = README.md
 		Rakefile = Rakefile
 		VERSION = VERSION
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{B02BC06E-2101-4058-B9C8-E5A2A8D85A1C}"
-	ProjectSection(SolutionItems) = preProject
-		lib\SimpleCrypto.dll = lib\SimpleCrypto.dll
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{AB6F4545-9DC4-46A2-B5B7-66C4EB396BDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

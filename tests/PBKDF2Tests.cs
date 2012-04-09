@@ -1,9 +1,9 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace SimpleCrypto.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class PBKDF2Tests
     {
 
@@ -13,7 +13,7 @@ namespace SimpleCrypto.Tests
             return target;
         }
 
-        [TestMethod]
+        [Test]
         public void Compute_3_Param_Sets_Properties()
         {
             var service = CreateICryptoService();
@@ -31,7 +31,7 @@ namespace SimpleCrypto.Tests
 
         }
 
-        [TestMethod]
+        [Test]
         public void Compute_2_Param_Sets_Properties()
         {
             var service = CreateICryptoService();
@@ -47,7 +47,7 @@ namespace SimpleCrypto.Tests
             Assert.AreEqual(plainText, service.PlainText, "Plain text does not match");
             Assert.AreEqual(hashIterations, service.HashIterations, "Default Hash Iterations does not match");
         }
-        [TestMethod]
+        [Test]
         public void Compute_1_Param_Sets_Properties()
         {
             var service = CreateICryptoService();
@@ -64,7 +64,7 @@ namespace SimpleCrypto.Tests
             Assert.AreEqual(hashIterations, service.HashIterations, "Default Hash Iterations does not match");
         }
 
-        [TestMethod]
+        [Test]
         public void PBKDF2_Hashes_To_512_Bits()
         {
             var service = CreateICryptoService();
@@ -79,7 +79,7 @@ namespace SimpleCrypto.Tests
             Assert.AreEqual(expectedSize, hashWithSaltBytes.Length);
         }
 
-        [TestMethod]
+        [Test]
         public void PBKDF2_Hashes_To_The_Different_Hash_On_Different_PlainText()
         {
             var service = CreateICryptoService();
@@ -92,7 +92,7 @@ namespace SimpleCrypto.Tests
             Assert.AreNotEqual(hash1, hash2);
         }
 
-        [TestMethod]
+        [Test]
         public void PBKDF2_Hashes_To_The_Same_Hash_On_Same_PlainText_And_Salt()
         {
             var service = CreateICryptoService();
