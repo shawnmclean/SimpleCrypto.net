@@ -36,32 +36,26 @@ namespace SimpleCrypto.Tests
         {
             var service = CreateICryptoService();
 
-            int hashIterations = 50;
-            int saltSize = 20;
+
+            string salt = "16.randomSalt";
             string plainText = "Password";
 
-            service.Compute(plainText, saltSize);
+            service.Compute(plainText, salt);
 
 
-            Assert.AreEqual(saltSize, service.SaltSize, "Salt size does not match");
+            Assert.AreEqual(salt, service.Salt, "Salt does not match");
             Assert.AreEqual(plainText, service.PlainText, "Plain text does not match");
-            Assert.AreEqual(hashIterations, service.HashIterations, "Default Hash Iterations does not match");
         }
         [Test]
         public void Compute_1_Param_Sets_Properties()
         {
             var service = CreateICryptoService();
 
-            int hashIterations = 50;
-            int saltSize = 16;
             string plainText = "Password";
 
             service.Compute(plainText);
 
-
-            Assert.AreEqual(saltSize, service.SaltSize, "Salt size does not match");
             Assert.AreEqual(plainText, service.PlainText, "Default Plain text does not match");
-            Assert.AreEqual(hashIterations, service.HashIterations, "Default Hash Iterations does not match");
         }
 
         [Test]
@@ -84,9 +78,9 @@ namespace SimpleCrypto.Tests
         {
             var service = CreateICryptoService();
 
-            service.Salt = "16.randomSalt";
-            var hash1 = service.Compute("password");
-            var hash2 = service.Compute("padfssword");
+            string salt = "16.randomSalt";
+            var hash1 = service.Compute("paffssword", salt);
+            var hash2 = service.Compute("password", salt);
 
             // Convert base64-encoded hash value into a byte array.
             Assert.AreNotEqual(hash1, hash2);
@@ -97,9 +91,9 @@ namespace SimpleCrypto.Tests
         {
             var service = CreateICryptoService();
 
-            service.Salt = "16.randomSalt";
-            var hash1 = service.Compute("password");
-            var hash2 = service.Compute("password");
+            string salt = "16.randomSalt";
+            var hash1 = service.Compute("password", salt);
+            var hash2 = service.Compute("password", salt);
 
             // Convert base64-encoded hash value into a byte array.
             Assert.AreEqual(hash1, hash2);
