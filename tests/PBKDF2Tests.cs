@@ -87,7 +87,7 @@ namespace SimpleCrypto.Tests
         }
 
         [Test]
-        public void PBKDF2_Hashes_To_The_Same_Hash_On_Same_PlainText_And_Salt()
+        public void PBKDF2_Hashes_To_The_Same_Hash_On_Same_PlainText()
         {
             var service = CreateICryptoService();
 
@@ -96,6 +96,20 @@ namespace SimpleCrypto.Tests
             var hash2 = service.Compute("password", salt);
 
             // Convert base64-encoded hash value into a byte array.
+            Assert.AreEqual(hash1, hash2);
+        }
+
+        [Test]
+        public void PBKDF2_Hashes_To_The_Same_Hash_On_Same_PlainText_With_Different_Instance()
+        {
+            var instance1 = CreateICryptoService();
+            var instance2 = CreateICryptoService();
+
+            var hash1 = instance1.Compute("password");
+            var salt = instance1.Salt;
+
+            var hash2 = instance2.Compute("password", salt);
+
             Assert.AreEqual(hash1, hash2);
         }
     }

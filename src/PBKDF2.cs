@@ -120,7 +120,7 @@ namespace SimpleCrypto
             //get the position of the . that splits the string
             var i = Salt.IndexOf('.');
             
-            HashIterations = int.Parse(Salt.Substring(0, i), System.Globalization.NumberStyles.HexNumber);
+            HashIterations = int.Parse(Salt.Substring(0, i), System.Globalization.NumberStyles.Number);
             
         }
     }
