@@ -9,6 +9,12 @@ namespace SimpleCrypto
 {
     public class PBKDF2 : ICryptoService
     {
+        public PBKDF2()
+        {
+            //Set default salt size and hashiterations
+            HashIterations = 50;
+            SaltSize = 16;
+        }
 
         public int HashIterations
         { get; set; }
@@ -23,17 +29,11 @@ namespace SimpleCrypto
         { get; private set; }
 
         public string Salt 
-        { get; set; }
+        { get; private set; }
 
         public string Compute()
         {
-            if (string.IsNullOrWhiteSpace(PlainText)) throw new InvalidOperationException("PlainText cannot be empty");
-
-            //generate the salt if none was set else extract the data from the salt
-            if (string.IsNullOrWhiteSpace(Salt))
-                generateSalt();
-            else
-                expandSalt();
+            if (string.IsNullOrEmpty(PlainText)) throw new InvalidOperationException("PlainText cannot be empty");
 
             if(SaltSize < 1) throw new InvalidOperationException(string.Format("Cannot generate a salt of size {0}, use a value greater than 1, recommended: 16", SaltSize));
             if (HashIterations < 1) throw new InvalidOperationException("HashIterations cannot be less than 1, recommended: 50");
@@ -68,12 +68,35 @@ namespace SimpleCrypto
             return HashedText;
         }
 
-        
-        public string Compute(string textToHash, int saltSize = 16, int hashIterations = 50)
+        public string Compute(string textToHash)
+        {
+            PlainText = textToHash;
+            //generate the salt
+            generateSalt();
+            //compute the hash
+            Compute();
+            return HashedText;
+        }
+
+
+        public string Compute(string textToHash, int saltSize, int hashIterations)
         {
             PlainText = textToHash;
             HashIterations = hashIterations;
             SaltSize = saltSize;
+            //generate the salt
+            generateSalt();
+            //compute the hash
+            Compute();
+            return HashedText;
+        }
+
+        public string Compute(string textToHash, string salt)
+        {
+            PlainText = textToHash;
+            Salt = salt;
+            //expand the salt
+            expandSalt();
             Compute();
             return HashedText;
         }
