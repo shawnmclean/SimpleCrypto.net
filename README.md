@@ -16,6 +16,26 @@ Go to the [downloads page](https://github.com/Mixmasterxp/SimpleCrypto.net/downl
 Unzip the file files and reference the following file in your .net project:
 
 	SimpleCrypto.dll
+
+Sample Source:
+
+    ICryptoService cryptoService = new PBKDF2();
+
+    //New User
+    string password = "password";
+
+    //save this hash to the database
+    string hashedPassword = cryptoService.Compute(password);
+
+    //save this salt to the database
+    string salt = cryptoService.Salt;
+            
+    //validate user
+    //refresh instance
+    cryptoService = new PBKDF2();
+
+    //compare the password (this should be true since we are rehashing the same password and using the same generated salt)
+    bool isPasswordValid = cryptoService.Compute(password, salt) == hashedPassword;
 	
 ## Necessary prerequisites
 
