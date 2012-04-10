@@ -31,9 +31,6 @@ Sample Source:
     string salt = cryptoService.Salt;
             
     //validate user
-    //refresh instance
-    cryptoService = new PBKDF2();
-
     //compare the password (this should be true since we are rehashing the same password and using the same generated salt)
     bool isPasswordValid = cryptoService.Compute(password, salt) == hashedPassword;
 	
