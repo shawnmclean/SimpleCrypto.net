@@ -37,6 +37,11 @@ namespace SimpleCrypto
         string Salt { get; }
 
         /// <summary>
+        /// Gets or sets the execution time in milliseconds that is used in hashing (keeps incrementing HashIteration until it is over the execution time)
+        /// </summary>
+        int ExecutionTime { get; set; }
+
+        /// <summary>
         /// Compute the hash
         /// </summary>
         /// <returns>the computed hash: HashedText</returns>
@@ -65,5 +70,12 @@ namespace SimpleCrypto
         /// <param name="salt">The salt to be used in the computation</param>
         /// <returns>the computed hash: HashedText</returns>
         string Compute(string textToHash, string salt);
+
+        /// <summary>
+        /// Get the time in milliseconds it takes to complete the hash for the iterations
+        /// </summary>
+        /// <param name="iteration"></param>
+        /// <returns></returns>
+        int GetElapsedTimeForIteration(int iteration);
     }
 }

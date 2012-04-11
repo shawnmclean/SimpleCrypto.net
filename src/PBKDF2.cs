@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -7,12 +8,15 @@ using System.Threading.Tasks;
 
 namespace SimpleCrypto
 {
+    /// <summary>
+    /// Used for hashing using the PBKDF2 Algorithm (wrapping Rfc2898DeriveBytes)
+    /// </summary>
     public class PBKDF2 : ICryptoService
     {
         public PBKDF2()
         {
             //Set default salt size and hashiterations
-            HashIterations = 50;
+            HashIterations = 5000;
             SaltSize = 16;
         }
 
@@ -31,41 +35,48 @@ namespace SimpleCrypto
         public string Salt 
         { get; private set; }
 
+        public int ExecutionTime
+        { get; set; }
+
         public string Compute()
         {
             if (string.IsNullOrEmpty(PlainText)) throw new InvalidOperationException("PlainText cannot be empty");
 
-            if(SaltSize < 1) throw new InvalidOperationException(string.Format("Cannot generate a salt of size {0}, use a value greater than 1, recommended: 16", SaltSize));
-            if (HashIterations < 1) throw new InvalidOperationException("HashIterations cannot be less than 1, recommended: 50");
+            //if there is no salt, generate one
+            if(string.IsNullOrEmpty(Salt))
+                generateSalt();
+
+            //If the hashIterations is less than 1 and we are not using execution time, then throw error for hashiteration
+            if (HashIterations < 1 && ExecutionTime < 1) throw new InvalidOperationException("HashIterations cannot be less than 1, recommended: 50");
 
 
+            //if there is an execution time, then find the number of iterations required
+            if(ExecutionTime > 0)
+            {
+                //set a minimum # of iterations to 1000 (
+                int minIters = 1000;
+                //test how long does hashing with 1000 iterations
+                int ms = GetElapsedTimeForIteration(minIters);
 
-            //convert the plain text into a byte array
-            byte[] plainTextBytes = Encoding.UTF8.GetBytes(PlainText);
+                //calculate the iterations needed for ExecutionTime
+                HashIterations = (minIters/ms)*ExecutionTime;
+            }
 
+            HashedText = calculateHash(HashIterations);
+
+            return HashedText;
+        }
+
+        private string calculateHash(int iteration)
+        {
             //convert the salt into a byte array
             byte[] saltBytes = Encoding.UTF8.GetBytes(Salt);
 
-            // Allocate array, which will hold plain text and salt.
-            byte[] plainTextWithSaltBytes =
-                    new byte[plainTextBytes.Length + saltBytes.Length];
-
-            // Copy plain text bytes into resulting array.
-            for (int a = 0; a < plainTextBytes.Length; a++)
-                plainTextWithSaltBytes[a] = plainTextBytes[a];
-
-            // Append salt bytes to the resulting array.
-            for (int a = 0; a < saltBytes.Length; a++)
-                plainTextWithSaltBytes[plainTextBytes.Length + a] = saltBytes[a];
-
-
-            using (var pbkdf2 = new Rfc2898DeriveBytes(PlainText, saltBytes, HashIterations))
+            using (var pbkdf2 = new Rfc2898DeriveBytes(PlainText, saltBytes, iteration))
             {
                 var key = pbkdf2.GetBytes(64);
-                HashedText = Convert.ToBase64String(key);
+                return Convert.ToBase64String(key);
             }
-
-            return HashedText;
         }
 
         public string Compute(string textToHash)
@@ -103,6 +114,9 @@ namespace SimpleCrypto
 
         private void generateSalt()
         {
+
+            if (SaltSize < 1) throw new InvalidOperationException(string.Format("Cannot generate a salt of size {0}, use a value greater than 1, recommended: 16", SaltSize));
+
             var rand = RandomNumberGenerator.Create();
 
             var ret = new byte[SaltSize];
@@ -115,13 +129,29 @@ namespace SimpleCrypto
 
         private void expandSalt()
         {
-            //TODO: Add appropiate exceptions
+            try
+            {
 
-            //get the position of the . that splits the string
-            var i = Salt.IndexOf('.');
-            
-            HashIterations = int.Parse(Salt.Substring(0, i), System.Globalization.NumberStyles.Number);
-            
+                //get the position of the . that splits the string
+                var i = Salt.IndexOf('.');
+
+                //Get the hash iteration from the first index
+                HashIterations = int.Parse(Salt.Substring(0, i), System.Globalization.NumberStyles.Number);
+                
+            }
+            catch(Exception)
+            {
+                throw new FormatException("The salt was not in an expected format of {int}.{string}");
+            }
         }
+
+        public int GetElapsedTimeForIteration(int iteration)
+        {
+            var sw = new Stopwatch();
+            sw.Start();
+            calculateHash(iteration);
+            return (int)sw.ElapsedMilliseconds;
+            
+        } 
     }
 }
