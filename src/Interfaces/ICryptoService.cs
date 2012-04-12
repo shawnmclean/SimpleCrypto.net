@@ -35,12 +35,7 @@ namespace SimpleCrypto
         /// Gets or sets the salt that will be used in computing the HashedText
         /// </summary>
         string Salt { get; }
-
-        /// <summary>
-        /// Gets or sets the execution time in milliseconds that is used in hashing (keeps incrementing HashIteration until it is over the execution time)
-        /// </summary>
-        int ExecutionTime { get; set; }
-
+        
         /// <summary>
         /// Compute the hash
         /// </summary>

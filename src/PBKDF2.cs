@@ -35,9 +35,6 @@ namespace SimpleCrypto
         public string Salt 
         { get; private set; }
 
-        public int ExecutionTime
-        { get; set; }
-
         public string Compute()
         {
             if (string.IsNullOrEmpty(PlainText)) throw new InvalidOperationException("PlainText cannot be empty");
@@ -45,23 +42,7 @@ namespace SimpleCrypto
             //if there is no salt, generate one
             if(string.IsNullOrEmpty(Salt))
                 generateSalt();
-
-            //If the hashIterations is less than 1 and we are not using execution time, then throw error for hashiteration
-            if (HashIterations < 1 && ExecutionTime < 1) throw new InvalidOperationException("HashIterations cannot be less than 1, recommended: 50");
-
-
-            //if there is an execution time, then find the number of iterations required
-            if(ExecutionTime > 0)
-            {
-                //set a minimum # of iterations to 1000 (
-                int minIters = 1000;
-                //test how long does hashing with 1000 iterations
-                int ms = GetElapsedTimeForIteration(minIters);
-
-                //calculate the iterations needed for ExecutionTime
-                HashIterations = (minIters/ms)*ExecutionTime;
-            }
-
+            
             HashedText = calculateHash(HashIterations);
 
             return HashedText;
