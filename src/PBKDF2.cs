@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace SimpleCrypto
 {
-    /// <summary>
-    /// Used for hashing using the PBKDF2 Algorithm (wrapping Rfc2898DeriveBytes)
-    /// </summary>
+
     public class PBKDF2 : ICryptoService
     {
         public PBKDF2()
@@ -48,17 +46,6 @@ namespace SimpleCrypto
             return HashedText;
         }
 
-        private string calculateHash(int iteration)
-        {
-            //convert the salt into a byte array
-            byte[] saltBytes = Encoding.UTF8.GetBytes(Salt);
-
-            using (var pbkdf2 = new Rfc2898DeriveBytes(PlainText, saltBytes, iteration))
-            {
-                var key = pbkdf2.GetBytes(64);
-                return Convert.ToBase64String(key);
-            }
-        }
 
         public string Compute(string textToHash)
         {
@@ -93,6 +80,28 @@ namespace SimpleCrypto
             return HashedText;
         }
 
+        public int GetElapsedTimeForIteration(int iteration)
+        {
+            var sw = new Stopwatch();
+            sw.Start();
+            calculateHash(iteration);
+            return (int)sw.ElapsedMilliseconds;
+
+        }
+
+
+        private string calculateHash(int iteration)
+        {
+            //convert the salt into a byte array
+            byte[] saltBytes = Encoding.UTF8.GetBytes(Salt);
+
+            using (var pbkdf2 = new Rfc2898DeriveBytes(PlainText, saltBytes, iteration))
+            {
+                var key = pbkdf2.GetBytes(64);
+                return Convert.ToBase64String(key);
+            }
+        }
+
         private void generateSalt()
         {
 
@@ -112,7 +121,6 @@ namespace SimpleCrypto
         {
             try
             {
-
                 //get the position of the . that splits the string
                 var i = Salt.IndexOf('.');
 
@@ -126,13 +134,6 @@ namespace SimpleCrypto
             }
         }
 
-        public int GetElapsedTimeForIteration(int iteration)
-        {
-            var sw = new Stopwatch();
-            sw.Start();
-            calculateHash(iteration);
-            return (int)sw.ElapsedMilliseconds;
-            
-        } 
+
     }
 }
