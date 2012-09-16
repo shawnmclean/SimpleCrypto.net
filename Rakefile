@@ -5,6 +5,7 @@ task :deploy => [:zip, :nup] do
 end
 
 zip :zip => :output do | zip |
+	Dir.mkdir("build") unless Dir.exists?("build")
     zip.directories_to_zip "out"
     zip.output_file = "SimpleCrypto.v#{bumper_version.to_s}.zip"
     zip.output_path = "build"
@@ -17,8 +18,6 @@ output :output => :test do |out|
 	out.file 'LICENSE.txt'
 	out.file 'README.md'
 	out.file 'VERSION'
-	# output can also build a nuspec :) 
-	# out.erb 'build/nchurn.nuspec.erb', :as => 'nchurn.nuspec', :locals => { :version => bumper_version }
 end
 
 desc "Test"
@@ -34,11 +33,17 @@ msbuild :build => :assemblyinfo do |msb|
   msb.solution = "SimpleCrypto.sln"
 end
 
-nugetpack :nup => :nus do |nuget|
-   nuget.command     = "tools/NuGet/NuGet.exe"
-   nuget.nuspec      = "SimpleCrypto.nuspec"
-   nuget.base_folder = "out/"
-   nuget.output      = "build/"
+##This does not work from albacore.
+#nugetpack :nup => :nus do |nuget|
+#   nuget.command     = "tools/NuGet/NuGet.exe"
+#   nuget.nuspec      = "SimpleCrypto.nuspec"
+#   nuget.base_folder = "out/"
+#   nuget.output      = "build/"
+#end
+
+##use this until patched
+task :nup => :nus do
+	sh "tools/NuGet/NuGet.exe pack -BasePath out/ -Output build/ out/SimpleCrypto.nuspec"
 end
 
 nuspec :nus => :output do |nuspec|
