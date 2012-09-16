@@ -17,7 +17,7 @@ Unzip the file files and reference the following file in your .net project:
 
 	SimpleCrypto.dll
 
-Sample Source:
+Hash Password Example:
 
     ICryptoService cryptoService = new PBKDF2();
 
@@ -33,7 +33,24 @@ Sample Source:
     //validate user
     //compare the password (this should be true since we are rehashing the same password and using the same generated salt)
     bool isPasswordValid = cryptoService.Compute(password, salt) == hashedPassword;
-	
+
+Generate Random Password Example
+
+    //generate uppercase passwords only
+    string password = RandomPassword.Generate(PasswordGroup.Uppercase);
+     
+    //generate both upper case and lower passwords only
+    string password = RandomPassword.Generate(PasswordGroup.Uppercase, PasswordGroup.Lowercase);
+
+    //generate 10 character uppercase passwords only
+    string password = RandomPassword.Generate(10, PasswordGroup.Uppercase);
+
+
 ## Necessary prerequisites
 
 .NET 4
+
+
+##Changelog
+
+  **0.2.0.0 - September 16, 2012** - Generate Random password feature added.
