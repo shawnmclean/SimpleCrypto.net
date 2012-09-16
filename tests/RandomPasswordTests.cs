@@ -37,6 +37,16 @@ namespace SimpleCrypto.Tests
         }
 
         [Test]
+        public void RandomPassword_Generates_Single_Length_Uppercase()
+        {
+            int length = 15;
+            string password = RandomPassword.Generate(length, PasswordGroup.Uppercase);
+
+            Assert.IsTrue(Regex.IsMatch(password, "^[A-Z]+$"), "Non-uppercase found in in uppercase only");
+            Assert.AreEqual(length, password.Length, "Password length is incorrect");
+        }
+
+        [Test]
         public void RandomPassword_Generates_Both_Lowercase_And_Uppercase()
         {
             string password = RandomPassword.Generate(PasswordGroup.Uppercase, PasswordGroup.Lowercase);
