@@ -34,7 +34,7 @@ Hash Password Example:
     //compare the password (this should be true since we are rehashing the same password and using the same generated salt)
     bool isPasswordValid = cryptoService.Compute(password, salt) == hashedPassword;
 
-Generate Random Password Example
+Generate Random Password Example:
 
     //generate uppercase passwords only
     string password = RandomPassword.Generate(PasswordGroup.Uppercase);
