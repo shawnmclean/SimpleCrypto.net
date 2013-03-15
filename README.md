@@ -53,6 +53,5 @@ Generate Random Password Example:
 
 ##Changelog
 
-  **0.2.0.0 - September 16, 2012** - Generate Random password feature added.
-  
-  **0.3.0.0 - March 14, 2013** - Generate Salt feature added.
+  1. **0.2.0.0 - September 16, 2012** - Generate Random password feature added.
+  2. **0.3.0.0 - March 14, 2013** - Generate Salt feature added.
