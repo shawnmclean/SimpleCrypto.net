@@ -112,5 +112,57 @@ namespace SimpleCrypto.Tests
 
             Assert.AreEqual(hash1, hash2);
         }
+
+        [Test]
+        public void Generate_Salt_In_Correct_Format()
+        {
+            var crypto = CreateICryptoService();
+
+            var salt = crypto.GenerateSalt();
+
+            //get the position of the . that splits the string
+            var i = salt.IndexOf('.');
+            int hashIter = 0;
+            int.TryParse(salt.Substring(0, i), out hashIter);
+            Assert.Greater(hashIter, 0);
+        }
+
+        [Test]
+        public void Generate_Salt_Has_Correct_Hash_Iterations()
+        {
+            var crypto = CreateICryptoService();
+
+            var salt = crypto.GenerateSalt();
+
+            //get the position of the . that splits the string
+            var i = salt.IndexOf('.');
+            int hashIter = 0;
+            int.TryParse(salt.Substring(0, i), out hashIter);
+            Assert.AreEqual(crypto.HashIterations, hashIter);
+        }
+
+        [Test]
+        [Ignore]
+        public void Generate_Salt_Has_Correct_Salt_Size()
+        {
+            var crypto = CreateICryptoService();
+
+            var salt = crypto.GenerateSalt();
+
+            //get the position of the . that splits the string
+            var i = salt.IndexOf('.');
+            string basicSalt = salt.Substring(i+1);
+            Assert.AreEqual(crypto.SaltSize, basicSalt.Length, "Salt Size is incorrect");
+        }
+
+        [Test]
+        public void Generate_Salt_Sets_Salt_Property()
+        {
+            var crypto = CreateICryptoService();
+
+            var salt = crypto.GenerateSalt();
+
+            Assert.AreEqual(crypto.Salt, salt, "The returned salt is not the salt set as parameter");
+        }
     }
 }
