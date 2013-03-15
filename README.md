@@ -23,13 +23,13 @@ Hash Password Example:
 
     //New User
     string password = "password";
+	
+    //save this salt to the database
+    string salt = cryptoService.GenerateSalt();
 
     //save this hash to the database
     string hashedPassword = cryptoService.Compute(password);
-
-    //save this salt to the database
-    string salt = cryptoService.Salt;
-            
+	            
     //validate user
     //compare the password (this should be true since we are rehashing the same password and using the same generated salt)
     bool isPasswordValid = cryptoService.Compute(password, salt) == hashedPassword;
