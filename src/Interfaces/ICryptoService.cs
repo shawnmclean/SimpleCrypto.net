@@ -32,9 +32,9 @@ namespace SimpleCrypto
         string HashedText { get; }
 
         /// <summary>
-        /// Gets or sets the salt that will be used in computing the HashedText
+        /// Gets or sets the salt that will be used in computing the HashedText. This contains both Salt and HashIterations.
         /// </summary>
-        string Salt { get; }
+        string Salt { get; set; }
         
         /// <summary>
         /// Compute the hash
@@ -43,7 +43,7 @@ namespace SimpleCrypto
         string Compute();
 
         /// <summary>
-        /// Compute the hash using default generated salt
+        /// Compute the hash using default generated salt. Will Generate a salt if non was assigned
         /// </summary>
         /// <param name="textToHash"></param>
         /// <returns></returns>
@@ -65,6 +65,20 @@ namespace SimpleCrypto
         /// <param name="salt">The salt to be used in the computation</param>
         /// <returns>the computed hash: HashedText</returns>
         string Compute(string textToHash, string salt);
+
+        /// <summary>
+        /// Generates a salt with default salt size and iterations
+        /// </summary>
+        /// <returns>the generated salt</returns>
+        string GenerateSalt();
+
+        /// <summary>
+        /// Generates a salt
+        /// </summary>
+        /// <param name="hashIterations">the hash iterations to add to the salt</param>
+        /// <param name="saltSize">the size of the salt</param>
+        /// <returns></returns>
+        string GenerateSalt(int hashIterations, int saltSize);
 
         /// <summary>
         /// Get the time in milliseconds it takes to complete the hash for the iterations

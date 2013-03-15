@@ -31,7 +31,7 @@ namespace SimpleCrypto
         { get; private set; }
 
         public string Salt 
-        { get; private set; }
+        { get; set; }
 
         public string Compute()
         {
@@ -39,7 +39,7 @@ namespace SimpleCrypto
 
             //if there is no salt, generate one
             if(string.IsNullOrEmpty(Salt))
-                generateSalt();
+                GenerateSalt();
             
             HashedText = calculateHash(HashIterations);
 
@@ -50,8 +50,6 @@ namespace SimpleCrypto
         public string Compute(string textToHash)
         {
             PlainText = textToHash;
-            //generate the salt
-            generateSalt();
             //compute the hash
             Compute();
             return HashedText;
@@ -61,10 +59,8 @@ namespace SimpleCrypto
         public string Compute(string textToHash, int saltSize, int hashIterations)
         {
             PlainText = textToHash;
-            HashIterations = hashIterations;
-            SaltSize = saltSize;
             //generate the salt
-            generateSalt();
+            GenerateSalt(hashIterations, saltSize);
             //compute the hash
             Compute();
             return HashedText;
@@ -78,6 +74,29 @@ namespace SimpleCrypto
             expandSalt();
             Compute();
             return HashedText;
+        }
+
+        public string GenerateSalt()
+        {
+            if (SaltSize < 1) throw new InvalidOperationException(string.Format("Cannot generate a salt of size {0}, use a value greater than 1, recommended: 16", SaltSize));
+
+            var rand = RandomNumberGenerator.Create();
+
+            var ret = new byte[SaltSize];
+
+            rand.GetBytes(ret);
+
+            //assign the generated salt in the format of {iterations}.{salt}
+            Salt = string.Format("{0}.{1}", HashIterations, Convert.ToBase64String(ret));
+
+            return Salt;
+        }
+
+        public string GenerateSalt(int hashIterations, int saltSize)
+        {
+            HashIterations = hashIterations;
+            SaltSize = saltSize;
+            return GenerateSalt();
         }
 
         public int GetElapsedTimeForIteration(int iteration)
@@ -101,22 +120,7 @@ namespace SimpleCrypto
                 return Convert.ToBase64String(key);
             }
         }
-
-        private void generateSalt()
-        {
-
-            if (SaltSize < 1) throw new InvalidOperationException(string.Format("Cannot generate a salt of size {0}, use a value greater than 1, recommended: 16", SaltSize));
-
-            var rand = RandomNumberGenerator.Create();
-
-            var ret = new byte[SaltSize];
-
-            rand.GetBytes(ret);
-
-            //assign the generated salt in the format of {iterations}.{salt}
-            Salt = string.Format("{0}.{1}",HashIterations, Convert.ToBase64String(ret));
-        }
-
+        
         private void expandSalt()
         {
             try
