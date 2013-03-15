@@ -77,7 +77,7 @@ namespace SimpleCrypto
         /// </summary>
         /// <param name="hashIterations">the hash iterations to add to the salt</param>
         /// <param name="saltSize">the size of the salt</param>
-        /// <returns></returns>
+        /// <returns>the generated salt</returns>
         string GenerateSalt(int hashIterations, int saltSize);
 
         /// <summary>
