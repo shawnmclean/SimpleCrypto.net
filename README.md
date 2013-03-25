@@ -12,8 +12,9 @@ Simple cryptography library that wraps complex hashing algorithms for quick and 
 
 ## Usage
 
-Go to the [downloads page](https://github.com/Mixmasterxp/SimpleCrypto.net/downloads) and download the latest version or utilize the NuGet package.
-Unzip the file files and reference the following file in your .net project:
+You may download the source and build the project or install it directly from NuGet.
+
+If building the source, please reference the following file in your .net project:
 
 	SimpleCrypto.dll
 
