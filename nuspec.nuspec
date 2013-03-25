@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>SimpleCrypto</id>
-        <version>0</version>
+        <version>0.0.0.0</version>
         <title>SimpleCrypto.Net</title>
         <authors>Shawn Mclean</authors>
         <owners>Shawn Mclean</owners>
