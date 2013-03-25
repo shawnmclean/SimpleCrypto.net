@@ -14,8 +14,8 @@ namespace SimpleCrypto
         public PBKDF2()
         {
             //Set default salt size and hashiterations
-            HashIterations = 5000;
-            SaltSize = 16;
+            HashIterations = 100000;
+            SaltSize = 34;
         }
 
         public int HashIterations
@@ -105,7 +105,6 @@ namespace SimpleCrypto
             sw.Start();
             calculateHash(iteration);
             return (int)sw.ElapsedMilliseconds;
-
         }
 
 
