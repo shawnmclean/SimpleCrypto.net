@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>SimpleCrypto</id>
+        <version></version>
+        <title>SimpleCrypto.Net</title>
+        <authors>Shawn Mclean</authors>
+        <owners>Shawn Mclean</owners>
+        <projectUrl>https://github.com/shawnmclean/SimpleCrypto.net</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Simple cryptography library that wraps complex hashing algorithms for quick and simple usage.</description>
+        <releaseNotes />
+        <copyright />
+        <language>en-US</language>
+    </metadata>
+    <files>
+        <file src="out\SimpleCrypto.dll" target="lib\SimpleCrypto.dll" />
+    </files>
+</package>
