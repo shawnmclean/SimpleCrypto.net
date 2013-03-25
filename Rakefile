@@ -51,9 +51,9 @@ nuspec :nus => :output do |nuspec|
    nuspec.version = bumper_version.to_s
    nuspec.authors = "Shawn Mclean"
    nuspec.description = "Simple cryptography library that wraps complex hashing algorithms for quick and simple usage."
-   nuspec.title = "SimpleCrypto"
+   nuspec.title = "SimpleCrypto.Net"
    nuspec.language = "en-US"
-   nuspec.projectUrl = "https://github.com/Mixmasterxp/SimpleCrypto.net"
+   nuspec.projectUrl = "https://github.com/ShawnMclean/SimpleCrypto.net"
    nuspec.working_directory = "out/"
    nuspec.output_file = "SimpleCrypto.nuspec"
    nuspec.file "SimpleCrypto.dll", "lib"
@@ -64,8 +64,8 @@ assemblyinfo :assemblyinfo do |asm|
   asm.version = bumper_version.to_s
   asm.file_version = bumper_version.to_s
 
-  asm.company_name = "Self"
-  asm.product_name = "SimpleCrypto"
-  asm.copyright = "Shawn Mclean (c) 2012"
+  asm.company_name = "Xormis"
+  asm.product_name = "SimpleCrypto.Net"
+  asm.copyright = "Shawn Mclean (c) 2013"
   asm.output_file = "AssemblyInfo.cs"
 end
