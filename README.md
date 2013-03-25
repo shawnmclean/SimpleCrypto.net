@@ -50,6 +50,9 @@ Generate Random Password Example:
 
 .NET 4
 
+## License
+
+SimpleCrypto.NET is licensed with the Apache License, version 2.0. You can find more information on the license here: http://www.apache.org/licenses/LICENSE-2.0.html
 
 ##Changelog
 
