@@ -9,8 +9,14 @@ using System.Threading.Tasks;
 namespace SimpleCrypto
 {
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class PBKDF2 : ICryptoService
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PBKDF2"/> class.
+        /// </summary>
         public PBKDF2()
         {
             //Set default salt size and hashiterations
@@ -18,21 +24,44 @@ namespace SimpleCrypto
             SaltSize = 34;
         }
 
+        /// <summary>
+        /// Gets or sets the number of iterations the hash will go through
+        /// </summary>
         public int HashIterations
         { get; set; }
 
+        /// <summary>
+        /// Gets or sets the size of salt that will be generated if no Salt was set
+        /// </summary>
         public int SaltSize
         { get; set; }
 
+        /// <summary>
+        /// Gets or sets the plain text to be hashed
+        /// </summary>
         public string PlainText
         { get; set; }
 
+        /// <summary>
+        /// Gets the base 64 encoded string of the hashed PlainText
+        /// </summary>
         public string HashedText 
         { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the salt that will be used in computing the HashedText. This contains both Salt and HashIterations.
+        /// </summary>
         public string Salt 
         { get; set; }
 
+
+        /// <summary>
+        /// Compute the hash
+        /// </summary>
+        /// <returns>
+        /// the computed hash: HashedText
+        /// </returns>
+        /// <exception cref="System.InvalidOperationException">PlainText cannot be empty</exception>
         public string Compute()
         {
             if (string.IsNullOrEmpty(PlainText)) throw new InvalidOperationException("PlainText cannot be empty");
@@ -47,6 +76,11 @@ namespace SimpleCrypto
         }
 
 
+        /// <summary>
+        /// Compute the hash using default generated salt. Will Generate a salt if non was assigned
+        /// </summary>
+        /// <param name="textToHash"></param>
+        /// <returns></returns>
         public string Compute(string textToHash)
         {
             PlainText = textToHash;
@@ -56,6 +90,15 @@ namespace SimpleCrypto
         }
 
 
+        /// <summary>
+        /// Compute the hash that will also generate a salt from parameters
+        /// </summary>
+        /// <param name="textToHash">The text to be hashed</param>
+        /// <param name="saltSize">The size of the salt to be generated</param>
+        /// <param name="hashIterations"></param>
+        /// <returns>
+        /// the computed hash: HashedText
+        /// </returns>
         public string Compute(string textToHash, int saltSize, int hashIterations)
         {
             PlainText = textToHash;
@@ -66,6 +109,14 @@ namespace SimpleCrypto
             return HashedText;
         }
 
+        /// <summary>
+        /// Compute the hash that will utilize the passed salt
+        /// </summary>
+        /// <param name="textToHash">The text to be hashed</param>
+        /// <param name="salt">The salt to be used in the computation</param>
+        /// <returns>
+        /// the computed hash: HashedText
+        /// </returns>
         public string Compute(string textToHash, string salt)
         {
             PlainText = textToHash;
@@ -76,6 +127,13 @@ namespace SimpleCrypto
             return HashedText;
         }
 
+        /// <summary>
+        /// Generates a salt with default salt size and iterations
+        /// </summary>
+        /// <returns>
+        /// the generated salt
+        /// </returns>
+        /// <exception cref="System.InvalidOperationException"></exception>
         public string GenerateSalt()
         {
             if (SaltSize < 1) throw new InvalidOperationException(string.Format("Cannot generate a salt of size {0}, use a value greater than 1, recommended: 16", SaltSize));
@@ -92,6 +150,14 @@ namespace SimpleCrypto
             return Salt;
         }
 
+        /// <summary>
+        /// Generates a salt
+        /// </summary>
+        /// <param name="hashIterations">the hash iterations to add to the salt</param>
+        /// <param name="saltSize">the size of the salt</param>
+        /// <returns>
+        /// the generated salt
+        /// </returns>
         public string GenerateSalt(int hashIterations, int saltSize)
         {
             HashIterations = hashIterations;
@@ -99,6 +165,11 @@ namespace SimpleCrypto
             return GenerateSalt();
         }
 
+        /// <summary>
+        /// Get the time in milliseconds it takes to complete the hash for the iterations
+        /// </summary>
+        /// <param name="iteration"></param>
+        /// <returns></returns>
         public int GetElapsedTimeForIteration(int iteration)
         {
             var sw = new Stopwatch();
