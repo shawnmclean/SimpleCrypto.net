@@ -17,7 +17,6 @@ output :output => :test do |out|
 	out.file 'src/bin/release/SimpleCrypto.dll', :as=>'SimpleCrypto.dll'
 	out.file 'LICENSE.txt'
 	out.file 'README.md'
-	out.file 'VERSION'
 end
 
 desc "Test"
