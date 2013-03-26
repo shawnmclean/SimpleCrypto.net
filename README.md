@@ -1,4 +1,4 @@
-# SimpleCrypto.Net
+# SimpleCrypto.Net [![Build Status](http://teamcity.codebetter.com/app/rest/builds/buildType:\(id:bt964\)/statusIcon)](http://teamcity.codebetter.com/project.html?projectId=project321)
 
 ## NuGet
 
