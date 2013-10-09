@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using NUnit.Framework;
 
 namespace SimpleCrypto.Tests
@@ -163,6 +164,22 @@ namespace SimpleCrypto.Tests
             var salt = crypto.GenerateSalt();
 
             Assert.AreEqual(crypto.Salt, salt, "The returned salt is not the salt set as parameter");
+        }
+
+        [Test]
+        public void Comparison_To_Same_Hash_Returns_True()
+        {
+            var crypto = CreateICryptoService();
+
+            var hash1 = crypto.Compute("password");
+            var salt = crypto.Salt;
+
+            var hash2 = crypto.Compute("password", salt);
+
+            Assert.IsTrue(crypto.Compare(hash1, hash2), "Hash comparison fails");
+
+            var hash3 = crypto.Compute("pasw1rd", salt);
+            Assert.IsFalse(crypto.Compare(hash1, hash3), "Hash comparison should fail but didn't");
         }
     }
 }
