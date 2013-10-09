@@ -208,6 +208,24 @@ namespace SimpleCrypto
             }
         }
 
+        /// <summary>
+        /// Compare password hashes for equality. Uses a constant time comparison method.
+        /// </summary>
+        /// <param name="passwordHash1"></param>
+        /// <param name="passwordHash2"></param>
+        /// <returns></returns>
+        public bool Compare(string passwordHash1, string passwordHash2)
+        {
+            if (passwordHash1 == null || passwordHash2 == null)
+                return false;
 
+            int min_length = Math.Min(passwordHash1.Length, passwordHash2.Length);
+            int result = 0;
+
+            for(int i = 0; i < min_length; i++)
+                result |= passwordHash1[i] ^ passwordHash2[i];
+
+            return 0 == result;
+        }
     }
 }
