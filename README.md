@@ -33,7 +33,8 @@ Hash Password Example:
 	            
     //validate user
     //compare the password (this should be true since we are rehashing the same password and using the same generated salt)
-    bool isPasswordValid = cryptoService.Compute(password, salt) == hashedPassword;
+    string hashedPassword2 = cryptoService.Compute(password, salt);
+    bool isPasswordValid = cryptoService.Compare(hashedPassword, hashedPassword2);
 
 Generate Random Password Example:
 

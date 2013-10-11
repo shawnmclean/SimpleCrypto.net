@@ -86,5 +86,12 @@ namespace SimpleCrypto
         /// <param name="iteration"></param>
         /// <returns></returns>
         int GetElapsedTimeForIteration(int iteration);
+        
+        /// <summary>
+        /// Compare the passwords for equality
+        /// <param name="passwordHash1">The first password hash to compare</param>
+        /// <param name="passwordHash2">The second password hash to compare</param>
+        /// <returns>true: indicating the password hashes are the same, false otherwise.</param>
+        bool Compare(string passwordHash1, string passwordHash2);
     }
 }
