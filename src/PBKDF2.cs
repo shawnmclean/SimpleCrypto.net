@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
+//using System.Threading.Tasks;
 
 namespace SimpleCrypto
 {
@@ -45,13 +45,13 @@ namespace SimpleCrypto
         /// <summary>
         /// Gets the base 64 encoded string of the hashed PlainText
         /// </summary>
-        public string HashedText 
+        public string HashedText
         { get; private set; }
 
         /// <summary>
         /// Gets or sets the salt that will be used in computing the HashedText. This contains both Salt and HashIterations.
         /// </summary>
-        public string Salt 
+        public string Salt
         { get; set; }
 
 
@@ -67,9 +67,9 @@ namespace SimpleCrypto
             if (string.IsNullOrEmpty(PlainText)) throw new InvalidOperationException("PlainText cannot be empty");
 
             //if there is no salt, generate one
-            if(string.IsNullOrEmpty(Salt))
+            if (string.IsNullOrEmpty(Salt))
                 GenerateSalt();
-            
+
             HashedText = calculateHash(HashIterations);
 
             return HashedText;
@@ -184,13 +184,11 @@ namespace SimpleCrypto
             //convert the salt into a byte array
             byte[] saltBytes = Encoding.UTF8.GetBytes(Salt);
 
-            using (var pbkdf2 = new Rfc2898DeriveBytes(PlainText, saltBytes, iteration))
-            {
-                var key = pbkdf2.GetBytes(64);
-                return Convert.ToBase64String(key);
-            }
+            var pbkdf2 = new Rfc2898DeriveBytes(PlainText, saltBytes, iteration);
+            var key = pbkdf2.GetBytes(64);
+            return Convert.ToBase64String(key);
         }
-        
+
         private void expandSalt()
         {
             try
@@ -200,9 +198,9 @@ namespace SimpleCrypto
 
                 //Get the hash iteration from the first index
                 HashIterations = int.Parse(Salt.Substring(0, i), System.Globalization.NumberStyles.Number);
-                
+
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw new FormatException("The salt was not in an expected format of {int}.{string}");
             }
@@ -222,7 +220,7 @@ namespace SimpleCrypto
             int min_length = Math.Min(passwordHash1.Length, passwordHash2.Length);
             int result = 0;
 
-            for(int i = 0; i < min_length; i++)
+            for (int i = 0; i < min_length; i++)
                 result |= passwordHash1[i] ^ passwordHash2[i];
 
             return 0 == result;
