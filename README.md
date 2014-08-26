@@ -1,4 +1,10 @@
-# SimpleCrypto.Net [![Build Status](http://teamcity.codebetter.com/app/rest/builds/buildType:\(id:bt964\)/statusIcon)](http://teamcity.codebetter.com/project.html?projectId=project321&guest=1)
+[![NuGet](http://img.shields.io/nuget/v/SimpleCrypto.svg?style=flat-square)](https://www.nuget.org/packages/SimpleCrypto/)
+[![Downloads](http://img.shields.io/nuget/dt/SimpleCrypto.svg?style=flat-square)](https://www.nuget.org/packages/SimpleCrypto/)
+[![Build Status](http://img.shields.io/teamcity/codebetter/bt964.svg?style=flat-square)](http://teamcity.codebetter.com/project.html?projectId=project321&guest=1)
+[![Code Coverage](http://img.shields.io/teamcity/coverage/bt964.svg?style=flat-square)](http://teamcity.codebetter.com/project.html?projectId=project321&guest=1)
+
+
+# SimpleCrypto.Net
 
 ## NuGet
 
