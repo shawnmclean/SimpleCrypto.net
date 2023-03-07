@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace SimpleCrypto.Tests
 {
@@ -143,7 +141,8 @@ namespace SimpleCrypto.Tests
         }
 
         [Test]
-        [Ignore]
+        [Ignore("")]
+        
         public void Generate_Salt_Has_Correct_Salt_Size()
         {
             var crypto = CreateICryptoService();
