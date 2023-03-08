@@ -1,25 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FA42616F-B196-477E-B1C7-8AA8F7A2500E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D62D959A-C755-40AB-A773-0730D961BD16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrypto", "src\SimpleCrypto.csproj", "{ED8C6AD7-6CB7-4D5D-9A8F-C6E259DA40D9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrypto.Tests", "tests\SimpleCrypto.Tests.csproj", "{27FA9E8D-A1F3-4963-BF60-9DF623B86D58}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C2AB8C95-5AAF-42BC-B435-55E248A263F7}"
-	ProjectSection(SolutionItems) = preProject
-		AssemblyInfo.cs = AssemblyInfo.cs
-		LICENSE.txt = LICENSE.txt
-		nuspec.nuspec = nuspec.nuspec
-		Rakefile = Rakefile
-		README.md = README.md
-		VERSION = VERSION
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{AB6F4545-9DC4-46A2-B5B7-66C4EB396BDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCrypto.Tests", "tests\SimpleCrypto.Tests\SimpleCrypto.Tests.csproj", "{BD2D732A-3ED2-47E1-B7A7-FC70A87A7FFE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCrypto", "src\SimpleCrypto.csproj", "{8040A9F4-9B9E-4D56-801E-FC5A48D74957}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,20 +21,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ED8C6AD7-6CB7-4D5D-9A8F-C6E259DA40D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED8C6AD7-6CB7-4D5D-9A8F-C6E259DA40D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED8C6AD7-6CB7-4D5D-9A8F-C6E259DA40D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED8C6AD7-6CB7-4D5D-9A8F-C6E259DA40D9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27FA9E8D-A1F3-4963-BF60-9DF623B86D58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27FA9E8D-A1F3-4963-BF60-9DF623B86D58}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27FA9E8D-A1F3-4963-BF60-9DF623B86D58}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27FA9E8D-A1F3-4963-BF60-9DF623B86D58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD2D732A-3ED2-47E1-B7A7-FC70A87A7FFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2D732A-3ED2-47E1-B7A7-FC70A87A7FFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD2D732A-3ED2-47E1-B7A7-FC70A87A7FFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD2D732A-3ED2-47E1-B7A7-FC70A87A7FFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8040A9F4-9B9E-4D56-801E-FC5A48D74957}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8040A9F4-9B9E-4D56-801E-FC5A48D74957}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8040A9F4-9B9E-4D56-801E-FC5A48D74957}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8040A9F4-9B9E-4D56-801E-FC5A48D74957}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{ED8C6AD7-6CB7-4D5D-9A8F-C6E259DA40D9} = {FA42616F-B196-477E-B1C7-8AA8F7A2500E}
-		{27FA9E8D-A1F3-4963-BF60-9DF623B86D58} = {D62D959A-C755-40AB-A773-0730D961BD16}
+		{BD2D732A-3ED2-47E1-B7A7-FC70A87A7FFE} = {D62D959A-C755-40AB-A773-0730D961BD16}
+		{8040A9F4-9B9E-4D56-801E-FC5A48D74957} = {FA42616F-B196-477E-B1C7-8AA8F7A2500E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3D7529AC-A8B0-4194-845A-3F488AF50873}
 	EndGlobalSection
 EndGlobal

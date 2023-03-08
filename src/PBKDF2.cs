@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
-//using System.Threading.Tasks;
+
 
 namespace SimpleCrypto
 {
@@ -183,8 +180,7 @@ namespace SimpleCrypto
         {
             //convert the salt into a byte array
             byte[] saltBytes = Encoding.UTF8.GetBytes(Salt);
-
-            var pbkdf2 = new Rfc2898DeriveBytes(PlainText, saltBytes, iteration);
+            var pbkdf2 = new Rfc2898DeriveBytes(PlainText, saltBytes, iteration,HashAlgorithmName.SHA1);
             var key = pbkdf2.GetBytes(64);
             return Convert.ToBase64String(key);
         }

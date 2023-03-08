@@ -1,16 +1,15 @@
-[![NuGet](http://img.shields.io/nuget/v/SimpleCrypto.svg?style=flat-square)](https://www.nuget.org/packages/SimpleCrypto/)
-[![Downloads](http://img.shields.io/nuget/dt/SimpleCrypto.svg?style=flat-square)](https://www.nuget.org/packages/SimpleCrypto/)
-[![Build Status](http://img.shields.io/teamcity/codebetter/bt964.svg?style=flat-square)](http://teamcity.codebetter.com/project.html?projectId=project321&guest=1)
-[![Code Coverage](http://img.shields.io/teamcity/coverage/bt964.svg?style=flat-square)](http://teamcity.codebetter.com/project.html?projectId=project321&guest=1)
+[![NuGet](http://img.shields.io/nuget/v/net7-SimpleCrypto.svg?style=flat-square)](https://www.nuget.org/packages/net7-SimpleCrypto/)
+[![Downloads](http://img.shields.io/nuget/dt/net7-SimpleCrypto.svg?style=flat-square)](https://www.nuget.org/packages/net7-SimpleCrypto/)
 
 
-# SimpleCrypto.Net
+
+# SimpleCrypto.Net (.net 7 version)
 
 ## NuGet
 
 Visual Studio users can install this directly into their .NET projects by executing the following command in the [Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)
 
-    PM> Install-Package SimpleCrypto
+    PM> Install-Package net7-SimpleCrypto
 
 ## Description
 
@@ -64,5 +63,7 @@ SimpleCrypto.NET is licensed with the Apache License, version 2.0. You can find 
 
 ##Changelog
 
-  1. **0.3.0.0 - March 14, 2013** - Generate Salt feature added.
-  2. **0.2.0.0 - September 16, 2012** - Generate Random password feature added.
+  1. **0.4.0.0 - March 07, 2023** - Updated version of source project to .net7.
+  2. **0.3.0.0 - March 14, 2013** - Generate Salt feature added.
+  3. **0.2.0.0 - September 16, 2012** - Generate Random password feature added.
+  

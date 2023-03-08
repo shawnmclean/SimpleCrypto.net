@@ -4,11 +4,7 @@
 // Copyright (C) 2004 Obviex(TM). All rights reserved.
 // 
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace SimpleCrypto
 {

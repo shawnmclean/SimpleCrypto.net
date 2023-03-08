@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-//using System.Threading.Tasks;
-
-namespace SimpleCrypto
+﻿namespace SimpleCrypto
 {
     /// <summary>
     /// Interface for Simple Crypto Service
@@ -35,7 +29,7 @@ namespace SimpleCrypto
         /// Gets or sets the salt that will be used in computing the HashedText. This contains both Salt and HashIterations.
         /// </summary>
         string Salt { get; set; }
-        
+
         /// <summary>
         /// Compute the hash
         /// </summary>
@@ -86,7 +80,7 @@ namespace SimpleCrypto
         /// <param name="iteration"></param>
         /// <returns></returns>
         int GetElapsedTimeForIteration(int iteration);
-        
+
         /// <summary>
         /// Compare the passwords for equality
         /// <param name="passwordHash1">The first password hash to compare</param>
